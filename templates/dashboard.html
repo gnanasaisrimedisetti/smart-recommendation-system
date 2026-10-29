@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Recommendation System</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+    <div>
+        <h1>SmartRec.</h1>
+        <p>Your Personal Learning and Career Assistant</p>
+    </div>
+</header>
+
+<div class="layout">
+    <aside class="sidebar">
+        <h2>STUDENT PORTAL</h2>
+        <a class="active" href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="#student-form">My Profile</a>
+        <a href="#recommendations">Courses &amp; Study Materials</a>
+        <a href="#recommendations">Projects &amp; Career Path</a>
+        <a href="{{ url_for('profiles') }}">Saved Student Profiles</a>
+    </aside>
+
+    <main class="content">
+        <section class="welcome">
+            <p class="eyebrow">STUDENT LEARNING SPACE</p>
+            <h2>Smart Recommendation System</h2>
+            <p>Discover the right learning resources for your future.</p>
+        </section>
+
+        <section class="card" id="student-form">
+            <h2>Build Your Student Profile</h2>
+            <p>Tell us about your education, skills and career goal.</p>
+
+            <form method="POST" action="{{ url_for('dashboard') }}">
+                <label for="name">Full Name</label>
+                <input id="name" name="name" required
+                       placeholder="Enter your full name">
+
+                <label for="education">Degree and Branch</label>
+                <input id="education" name="education" required
+                       placeholder="Example: BTech Data Science">
+
+                <label for="year">Current Year of Study</label>
+                <input
+                    type="text"
+                    id="year"
+                    name="year"
+                    placeholder="Enter your year (e.g. BTech 2nd Year)"
+                    required
+                >
+
+                <label for="subjects">Subjects Studied</label>
+                <textarea id="subjects" name="subjects" required
+                          placeholder="Example: Python, Statistics, DBMS"></textarea>
+
+                <label for="skills">Current Skills</label>
+                <textarea id="skills" name="skills" required
+                          placeholder="Separate skills with commas, e.g. Python, SQL, Excel"></textarea>
+
+                <label for="goal">Career Goal</label>
+                <input
+                    type="text"
+                    id="goal"
+                    name="goal"
+                    placeholder="Enter any career goal (e.g. AI Engineer)"
+                    required
+                >
+
+                <button type="submit">Generate My Learning Path</button>
+            </form>
+        </section>
+
+        {% if profile %}
+        <section class="card results" id="recommendations">
+            <p class="eyebrow">YOUR PERSONALIZED RESULTS</p>
+            <h2>Welcome, {{ profile.name }}!</h2>
+
+            <div class="profile-summary">
+                <p><strong>Education:</strong> {{ profile.education }}</p>
+                <p><strong>Year:</strong> {{ profile.year }}</p>
+                <p><strong>Subjects:</strong> {{ profile.subjects }}</p>
+                <p><strong>Skills:</strong> {{ profile.skills }}</p>
+                <p><strong>Career Goal:</strong> {{ profile.goal }}</p>
+            </div>
+
+            <h3>Your Recommended Learning Path</h3>
+            <ol class="roadmap">
+                {% for item in roadmap %}
+                <li>
+                    <span>{{ item[0] }}</span>
+                    <a href="{{ item[1] }}" target="_blank"
+                       rel="noopener noreferrer">Open Resource ↗</a>
+                </li>
+                {% endfor %}
+            </ol>
+
+            <h3>Skills to Develop</h3>
+            <ul>
+                {% for item in missing %}
+                <li>{{ item }}</li>
+                {% else %}
+                <li>Keep improving your existing skills and build projects.</li>
+                {% endfor %}
+            </ul>
+
+            <p>Follow the learning path and build projects for your portfolio.</p>
+            <a href="{{ url_for('dashboard') }}">Create Another Profile</a>
+        </section>
+        {% endif %}
+
+        {% if students is defined %}
+        <section class="card">
+            <h2>Saved Student Profiles</h2>
+            {% if students %}
+                {% for student in students %}
+                <div class="saved-profile">
+                    <h3>{{ student['name'] }}</h3>
+                    <p>{{ student['education'] }} — {{ student['year'] }}</p>
+                    <p><strong>Goal:</strong> {{ student['goal'] }}</p>
+                    <p><strong>Skills:</strong> {{ student['skills'] }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No student profiles have been saved yet.</p>
+            {% endif %}
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        </section>
+        {% endif %}
+
+        <footer>SmartRec. | Learn Today, Build Your Future</footer>
+    </main>
+</div>
+
+</body>
+</html>

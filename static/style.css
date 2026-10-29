@@ -1,0 +1,183 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f6fc;
+    color: #26334b;
+}
+
+.topbar {
+    background: #23395d;
+    color: white;
+    padding: 22px 5%;
+}
+
+.topbar h1 {
+    margin: 0 0 8px;
+}
+
+.topbar p {
+    margin: 0;
+    color: #dce7f8;
+}
+
+.layout {
+    display: flex;
+    min-height: 85vh;
+}
+
+.sidebar {
+    width: 245px;
+    flex-shrink: 0;
+    background: #182b49;
+    padding: 25px 16px;
+}
+
+.sidebar h2 {
+    font-size: 13px;
+    color: #b8c8e0;
+    margin: 0 0 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 13px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #76a9ee;
+    color: #152641;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+    padding: 32px;
+}
+
+.welcome {
+    margin-bottom: 25px;
+}
+
+.welcome h2 {
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+.eyebrow {
+    color: #3478d4;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 18px #172b4d12;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 18px 0 7px;
+}
+
+input,
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 15px;
+    background: white;
+}
+
+textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #3478d4;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2459a9;
+}
+
+.profile-summary {
+    background: #eef5ff;
+    padding: 15px;
+    border-radius: 9px;
+    overflow-wrap: anywhere;
+}
+
+.roadmap li {
+    padding: 12px 0;
+    line-height: 1.6;
+}
+
+.roadmap a {
+    display: inline-block;
+    margin-left: 8px;
+    color: #2459a9;
+}
+
+.saved-profile {
+    padding: 15px 0;
+    border-bottom: 1px solid #e1e7f0;
+}
+
+footer {
+    text-align: center;
+    padding: 25px 0;
+    color: #65738a;
+}
+
+@media (max-width: 700px) {
+    .layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .content {
+        padding: 16px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .welcome h2 {
+        font-size: 24px;
+    }
+}
